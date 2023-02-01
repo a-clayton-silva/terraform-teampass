@@ -1,0 +1,5 @@
+ami_id        = "ami-0aa7d40eeae50c9a9" #"ami-052465340e6b59fc0"
+avail_zone    = "us-east-1a"
+instance_type = "t3.micro"
+env_prefix    = "efs"
+key_pair      = "dolibarr"

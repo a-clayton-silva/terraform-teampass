@@ -1,2 +1,5 @@
 # terraform-teampass
-Infra com criação de vpc, ec2, efs, sg
+Criação de infra como codigo
+- criação vpc, subnets, rotas, internet gateway
+- criação efs
+- criação ec2
