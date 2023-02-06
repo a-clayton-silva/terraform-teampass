@@ -6,7 +6,9 @@ module "ec2_instance" {
 
   ami                    = var.ami_id #amazon linux 2
   instance_type          = var.instance_type
-  key_name               = var.key_pair
+  depends_on = [null_resource.save_key_pair]
+  #key_name               = var.key_pair
+  key_name = "efs-key"
   availability_zone      = var.avail_zone
   monitoring             = true
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
