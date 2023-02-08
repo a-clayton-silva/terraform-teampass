@@ -27,20 +27,42 @@ module "ec2_instance" {
   user_data = <<EOF
 #!/bin/bash
 
-### codigo oficial, mount efs and install docker
+##### codigo oficial, mount efs and install docker #####
 
+## atualizar o linux
 sudo yum update -y
+
 # Mounting Efs 
 sudo mount -t nfs -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${aws_efs_file_system.efs.dns_name}:/  /var/www/html
+
 # Making Mount Permanent
 echo ${aws_efs_file_system.efs.dns_name}:/ /var/www/html nfs4 defaults,_netdev 0 0  | sudo cat >> /etc/fstab
+
 # Permission
 sudo chmod 755 /var/www/html
+
+# Install docker
 sudo amazon-linux-extras install docker
 sudo service docker start
 sudo systemctl enable docker
 sudo usermod -a -G docker ec2-user
 docker run -d --name meucontainer -v /var/www/html:/var/www/html nginx
+
+#
+
+
+
+## alteracao regiao horario
+sudo timedatectl set-timezone America/Sao_Paulo
+
+## crontab para desligar todos os dias as 22h
+echo "00 22    * * *      root	/sbin/shutdown -h now" >> /etc/crontab
+
+## no final resetar
+sudo shutdown -r now
+
+
+
 
 
 
