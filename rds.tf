@@ -1,12 +1,12 @@
 module "rds" {
-  source = "aws/rds"
+  source = "terraform-aws-modules/rds/aws"
 
-  db_instance_identifier = "mydbinstance"
+  identifier = "mydbinstance"
   allocated_storage      = 20
   engine                 = "postgres"
   engine_version         = "13.1"
   instance_class         = "db.t2.micro"
-  name                   = "mydatabase"
+  db_name                   = "mydatabase"
   username               = "mydbuser"
   password               = "mysecretpassword"
   vpc_security_group_ids = [aws_security_group.rds.id]
