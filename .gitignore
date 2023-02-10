@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 mykey.pem
+*.out
+*.t/
 # Crash log files
 crash.log
 
